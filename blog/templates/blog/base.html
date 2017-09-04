@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="{% static 'blog/images/favicon/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'blog/images/favicon/apple-touch-icon-152x152.png' %}">
+
+    <!-- CORE CSS-->
+    <link href="{% static 'blog/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'blog/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- CSS style Horizontal Nav (Layout 03)-->
+    <link href="{% static 'blog/css/style-horizontal.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+{#    <link href="{% static 'blog/css/page-center.css' %}" type="text/css" rel="stylesheet" media="screen,projection">#}
+    {#    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->#}
+    <link href="{% static 'blog/css/prism.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'blog/js/plugins/perfect-scrollbar/perfect-scrollbar.css' %}" type="text/css" rel="stylesheet"
+          media="screen,projection">
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="{% static 'blog/js/jquery-2.2.5.min.js' %}"></script>
+    <!-- Django-smart-selects-->
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/chainedm2m.js' %}"></script>
+    <script type="text/javascript" src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+    <!--materialize js-->
+    <script type="text/javascript" src="{% static 'blog/js/materialize.js' %}"></script>
+    <!--prism-->
+    <script type="text/javascript" src="{% static 'blog/js/prism.js' %}"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="{% static 'blog/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="{% static 'blog/js/plugins.js' %}"></script>
+</head>
+{% block content %}{% endblock %}
+</html>

@@ -1,0 +1,119 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles widget_tweaks %}
+
+{% block content %}
+    {#    <h2>Welcome, {{ user.get_full_name }}#}
+    {#        <small>{{ user.username }}</small>!#}
+    {#    </h2>#}
+    {#     {% if user.is_authenticated %}#}
+    {#        <a href="{% url 'logout' %}">logout</a>#}
+    {#      {% else %}#}
+    {#        <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>#}
+    {#      {% endif %}#}
+    {#    {% if articles %}#}
+    {#        {% for article in articles %}#}
+    {#            <h3><a href="{% url 'article_detailed' pk=article.pk %}">{{ article.title }}</a></h3>#}
+    {#            <p>{{ article.get_short_text }}</p>#}
+    {#            <h6>{{ article.author.username }}</h6>#}
+    {#            <h6>{{ article.published_date }}</h6>#}
+    {#            <h6>{{ article.author.country }}</h6>#}
+    {#            <h6>{{ article.author.city }}</h6>#}
+    {#        {% endfor %}#}
+    {#    {% else %}#}
+    {#        <p>No articles yet</p>#}
+    {#    {% endif %}#}
+    {##}
+    {#{% endblock %}#}
+
+    <body>
+    {% if user.is_authenticated %}
+        <!-- START HEADER -->
+        <header id="header" class="page-topbar">
+            <!-- start header nav-->
+            <div class="navbar-fixed">
+                <nav class="cyan">
+                    <div class="nav-wrapper">
+                        <ul class="left">
+                            <li><h1 class="logo-wrapper"><a href="{% url 'home' %}" class="brand-logo darken-1">Michael's blog</a></h1>
+                            </li>
+                        </ul>
+                        <div class="header-search-wrapper hide-on-med-and-down">
+                            <i class="mdi-action-search"></i>
+                            <form method="get">
+                            <div class="center">{% render_field filter.form.title %}</div>
+                            </form>
+{#                            <input type="text" name="Search" class="header-search-input z-depth-2"#}
+{#                                   placeholder="Explore Michael's blog"/>#}
+                        </div>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="{% url 'article_new' %}" class="waves-effect waves-block waves-light"><i class="mdi-content-add-box right"></i>New article</a>
+                            </li>
+                            <li><a href="{% url 'logout' %}" class="waves-effect waves-block waves-light"><i class="mdi-action-exit-to-app right"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
+            <!-- end header nav-->
+        </header>
+        <!-- END HEADER -->
+
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+                <!-- START CONTENT -->
+                <section id="content">
+
+                    <!--start container-->
+                    <div class="container">
+                        {% if articles %}
+                            <div id="card-stats">
+                            <div class="row">
+
+                                {% for article in articles.object_list %}
+                                    {% if forloop.counter0|divisibleby:"4" %}
+                                        </div>
+                                        <div class="row">
+                                    {% endif %}
+                                    <div class="col s12 m6 l3">
+                                        <div class="card">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                {% if article.image %}
+                                                    <img class="activator" src="{{ article.image.url }}">
+                                                {% else %}
+                                                    <img class="activator" src="{% static 'blog/images/test-image.jpg' %}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="card-content">
+                                                <span class="card-title activator grey-text text-darken-4">{{ article.title }}<i
+                                                        class="mdi-navigation-more-vert right"></i></span>
+                                                <p><a href="{% url 'article_detailed' pk=article.pk %}">Read more</a><span class="medium-small right">{{ article.author}} | {{ article.author.city }}</span></p>
+                                            </div>
+                                            <div class="card-reveal">
+                                                <span class="card-title grey-text text-darken-4">Card Title<i class="mdi-navigation-close right"></i></span>
+                                                <p>{{ article.get_short_text }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                            <div id="pagination" class="center">
+                                        {{ articles.render }}
+                                    </div>
+                                </div>
+                        {% endif %}
+                        </div>
+                        <!--end container-->
+                </section>
+                <!-- END CONTENT -->
+
+            </div>
+            <!-- END WRAPPER -->
+        </div>
+        <!-- END MAIN -->
+    {% endif %}
+    </body>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+    <body class="cyan">
+    <div class="container">
+        <div id="login-page" class="row">
+            <div class="col s12 z-depth-4 card-panel">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12 center">
+                            <h4>Signup</h4>
+                            <p class="center">Join Michael's blog now!</p>
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s6">
+                            <i class="mdi-social-person-outline prefix"></i>
+                            {% render_field form.username %}
+                            <label for="{{ form.username.id_for_label }}"
+                                   class="center-align">{{ form.username.label }}</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="mdi-communication-email prefix"></i>
+                            {% render_field form.email %}
+                            <label for="{{ form.email.id_for_label }}"
+                                   class="center-align">{{ form.email.label }}</label>
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s6">
+                            <i class="mdi-image-edit prefix"></i>
+                            {% render_field form.first_name %}
+                            <label for="{{ form.first_name.id_for_label }}"
+                                   class="center-align">{{ form.first_name.label }}</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="mdi-image-edit prefix"></i>
+                            {% render_field form.last_name %}
+                            <label for="{{ form.last_name.id_for_label }}"
+                                   class="center-align">{{ form.last_name.label }}</label>
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="mdi-social-public prefix"></i>
+                            {% render_field form.country class='browser-default dropdown' %}
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12 mdl-selectfield">
+                            <i class="mdi-social-domain prefix"></i>
+                            {% render_field form.region class='browser-default dropdown' %}
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12 mdl-selectfield">
+                            <i class="mdi-social-location-city prefix"></i>
+                            {% render_field form.city class='browser-default dropdown' %}
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="mdi-editor-insert-invitation prefix"></i>
+                            {% render_field form.birth_date class='datepicker' %}
+                            <label for="{{ form.birth_date.id_for_label }}">{{ form.birth_date.label }}</label>
+                        </div>
+                    </div>
+                    <div class="row margin">
+                        <div class="input-field col s6">
+                            <i class="mdi-action-lock-outline prefix"></i>
+                            {% render_field form.password1 %}
+                            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="mdi-action-lock-outline prefix"></i>
+                            {% render_field form.password2 %}
+                            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                        </div>
+                    </div>
+                    {% if form.errors %}
+                        <div class="row margin">
+                            <div class="col s12"></div>
+                            <div id="signup-form-errors" class="medium-small">
+                                <p>Signup failed<br/>Please resubmit the form after making the following changes:</p>
+                                <ul>
+                                    {% for field in form %}
+                                        <li>{{ field.errors|striptags }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button type="submit" class="btn waves-effect waves-light col s12">Register Now</button>
+                        </div>
+                        <div class="input-field col s12">
+                            <p class="margin center medium-small sign-up">Already have an account? <a
+                                    href="{% url 'login' %}">Login</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 35, // Creates a dropdown of 35 years to control year
+            min: [1920, 12, 31],
+            max: [2007, 12, 31],
+            today: '',
+            clear: '',
+            format: 'yyyy-mm-dd'
+        });
+    </script>
+    </body>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}

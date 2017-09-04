@@ -1,0 +1,62 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <body>
+    {% if user.is_authenticated %}
+        <!-- START HEADER -->
+        <header id="header" class="page-topbar">
+            <!-- start header nav-->
+            <div class="navbar-fixed">
+                <nav class="cyan">
+                    <div class="nav-wrapper">
+                        <ul class="left">
+                            <li><h1 class="logo-wrapper"><a href="{% url 'home' %}" class="brand-logo darken-1">Michael's
+                                blog</a></h1>
+                            </li>
+                        </ul>
+                        <div class="header-search-wrapper hide-on-med-and-down">
+                            <i class="mdi-action-search"></i>
+                            <input type="text" name="Search" class="header-search-input z-depth-2"
+                                   placeholder="Explore Michael's blog"/>
+                        </div>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="{% url 'article_new' %}" class="waves-effect waves-block waves-light"><i
+                                    class="mdi-content-add-box right"></i>New article</a>
+                            </li>
+                            <li><a href="{% url 'logout' %}" class="waves-effect waves-block waves-light"><i
+                                    class="mdi-action-exit-to-app right"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
+            <!-- end header nav-->
+        </header>
+        <!-- END HEADER -->
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+                <!-- START CONTENT -->
+                <section id="content">
+                    <!--start container-->
+                    <div class="container" style="padding-left: 150px; padding-right: 150px;">
+                        <img id="article-detailed-img" src="{{ article.image.url }}" alt="article image">
+                        <h3>{{ article.title }}</h3>
+                        <p id="article-detailed-txt">{{ article.text |linebreaksbr }}</p>
+                        <p style="float: right; text-align: right">{{ article.author.username }}<br>{{ article.author.city }}
+                                {% if article.published_date %}
+                                    <br>{{ article.published_date }}{% endif %}</p>
+                    </div>
+                    <!--end container-->
+                </section>
+                <!-- END CONTENT -->
+
+            </div>
+            <!-- END WRAPPER -->
+        </div>
+        <!-- END MAIN -->
+    {% endif %}
+    </body>
+{% endblock %}
